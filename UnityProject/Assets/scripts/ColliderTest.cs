@@ -17,23 +17,27 @@ public class ColliderTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         if (grab == 1)
         {
-            StartCoroutine(TestCoroutine());
+            GrabObj();
         }
 
         if (grab == 0)
         {
             ReleaseObj();   
         }
+        */
     }
 
-    private void ReleaseObj()
+    public void GrabObj()
     {
-        anim.GetComponent<Animator>().StartPlayback();
-        anim.GetComponent<Animator>().speed = -1f;
-        CollidedWith.transform.parent = null;
-        CollidedWith.GetComponent<Rigidbody>().isKinematic = false;
+        StartCoroutine(TestCoroutineStart());
+    }
+
+    public void ReleaseObj()
+    {
+        StartCoroutine(TestCoroutineStop());
     }
 
     private void OnTriggerEnter(Collider other)
@@ -42,13 +46,30 @@ public class ColliderTest : MonoBehaviour
         print(other);
     }
 
-    IEnumerator TestCoroutine()
+    IEnumerator TestCoroutineStart()
     {
         grab = 2;
         anim.GetComponent<Animator>().speed = 1f;
         yield return new WaitForSeconds(3.7f);
         anim.GetComponent<Animator>().speed = 0f;
-        CollidedWith.GetComponent<Rigidbody>().isKinematic = true;
-        CollidedWith.transform.parent = this.transform;
+        if (CollidedWith != null)
+        {
+            CollidedWith.GetComponent<Rigidbody>().isKinematic = true;
+            CollidedWith.transform.parent = this.transform;
+        }
+    }
+
+    IEnumerator TestCoroutineStop()
+    {
+        grab = 2;
+        anim.GetComponent<Animator>().StartPlayback();
+        anim.GetComponent<Animator>().speed = -1f;
+        if (CollidedWith != null)
+        {
+            CollidedWith.transform.parent = null;
+            CollidedWith.GetComponent<Rigidbody>().isKinematic = false;
+        }
+        yield return new WaitForSeconds(3.7f);
+        anim.GetComponent<Animator>().speed = 0f;
     }
 }

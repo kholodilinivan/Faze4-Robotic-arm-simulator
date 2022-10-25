@@ -157,20 +157,25 @@ public class Server : MonoBehaviour {
         switch(cleanData[0])
         {
             case "ModRobot":
-                ModifyRobot(float.Parse(cleanData[1], CultureInfo.InvariantCulture), float.Parse(cleanData[2], CultureInfo.InvariantCulture), float.Parse(cleanData[3], CultureInfo.InvariantCulture), float.Parse(cleanData[4], CultureInfo.InvariantCulture), float.Parse(cleanData[5], CultureInfo.InvariantCulture), float.Parse(cleanData[6], CultureInfo.InvariantCulture), int.Parse(cleanData[7], CultureInfo.InvariantCulture));
+                ModifyRobot(float.Parse(cleanData[1], CultureInfo.InvariantCulture), float.Parse(cleanData[2], CultureInfo.InvariantCulture), float.Parse(cleanData[3], CultureInfo.InvariantCulture), float.Parse(cleanData[4], CultureInfo.InvariantCulture), float.Parse(cleanData[5], CultureInfo.InvariantCulture), float.Parse(cleanData[6], CultureInfo.InvariantCulture));
+                break;
+            case "ModGrab":
+                ModifyGrab(int.Parse(cleanData[1], CultureInfo.InvariantCulture));
                 break;
             default:
-                break;       
+                break;
+            case "Camera":
+                Debug.Log(cleanData[2]);
+                StartCoroutine(SendCamCapture(c, cleanData[2], cleanData[3], cleanData[1]));
+                Response = cleanData[3] + ".png";
+                break;
         }
     }
 
-    private void ModifyRobot(float a1, float a2, float a3, float a4, float a5, float a6, int grab)
+    private void ModifyRobot(float a1, float a2, float a3, float a4, float a5, float a6)
     {
         GameObject robot = GameObject.Find("Robot1");
         RobotTest robotIns = robot.GetComponent<RobotTest>();
-
-        GameObject end_eff = GameObject.Find("AnimationEE");
-        ColliderTest end_eff_grab = end_eff.GetComponent<ColliderTest>();
 
         robotIns.J1Angle = a1;
         robotIns.J2Angle = a2;
@@ -178,7 +183,41 @@ public class Server : MonoBehaviour {
         robotIns.J4Angle = a4;
         robotIns.J5Angle = a5;
         robotIns.J6Angle = a6;
-        end_eff_grab.grab = grab;
+    }
+
+    private void ModifyGrab(int grab)
+    {
+        GameObject end_eff = GameObject.Find("AnimationEE");
+        ColliderTest end_eff_grab = end_eff.GetComponent<ColliderTest>();
+
+        // end_eff_grab.grab = grab;
+        if (grab == 1)
+        {
+            end_eff_grab.GrabObj();
+        }
+        if (grab == 0)
+        {
+            end_eff_grab.ReleaseObj();
+        }
+    }
+
+    //Organizes and Sends Picture
+    IEnumerator SendCamCapture(ServerClient c, string FilePath, string FileName, string CameraSelect)
+    {
+        GameObject Cube = GameObject.Find("CameraPrtSc");
+        CameraPtrSc CubeComp = Cube.GetComponent<CameraPtrSc>();
+        CubeComp.CaptureImage(FilePath, FileName, CameraSelect);
+        while (!CubeComp.CaptureDone())
+        {
+            yield return null;
+        }
+        StartCoroutine(SerializeCapture(c, CubeComp.GetPrtSc(), CubeComp.Width, CubeComp.Height));
+    }
+
+    IEnumerator SerializeCapture(ServerClient c, byte[] PixelData, int Width, int Length)
+    {
+        OutgoingData(c, PixelData);
+        yield return null;
     }
 }
 
