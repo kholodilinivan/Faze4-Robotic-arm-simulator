@@ -21,3 +21,13 @@ Matlab: MatlabProject - main.m
 Video explanations in English - https://youtu.be/weWE5GCNHQc \
 Video explanations in Russian -  https://youtu.be/2lJeruIYoII \
 ![image](https://user-images.githubusercontent.com/34764174/193420117-6117cbbd-f9f7-483c-a610-99a56df90480.png)
+
+- Part 3 \
+How to grab objects and sort them by color (Image transfer from Unity to Matlab). \
+Corresponding folders: \
+Unity Scene: UnityProject/Assets/Scenes/ImportScene \
+Matlab: MatlabProject - Part3.m
+\
+Video explanations in English - https://youtu.be/E-iqg9MUcO8 \
+Video explanations in Russian -  https://youtu.be/yOjKVeVwmjw \
+![image](https://user-images.githubusercontent.com/34764174/198833470-8e1203ee-ea53-416a-8bc5-0e5ead3057a5.png)
