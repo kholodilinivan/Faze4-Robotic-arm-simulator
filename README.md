@@ -31,3 +31,13 @@ Matlab: MatlabProject - Part3.m
 Video explanations in English - https://youtu.be/E-iqg9MUcO8 \
 Video explanations in Russian -  https://youtu.be/yOjKVeVwmjw \
 ![image](https://user-images.githubusercontent.com/34764174/198833470-8e1203ee-ea53-416a-8bc5-0e5ead3057a5.png)
+
+- Part 4 \
+Adding conveyor to Unity and sort objects by color. \
+Corresponding folders: \
+Unity Scene: UnityProject/Assets/Scenes/ImportScene2 \
+Matlab: MatlabProject - Part4.m
+\
+Video explanations in English - https://youtu.be/bwmzS4klYAo \
+Video explanations in Russian -  \
+![image](https://user-images.githubusercontent.com/34764174/201480908-ae95fb9e-c0ef-47ee-b1b2-28e55a3c4c4b.png)
