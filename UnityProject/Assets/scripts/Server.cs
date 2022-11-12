@@ -162,6 +162,9 @@ public class Server : MonoBehaviour {
             case "ModGrab":
                 ModifyGrab(int.Parse(cleanData[1], CultureInfo.InvariantCulture));
                 break;
+            case "NewObj":
+                ModifyCube(int.Parse(cleanData[1], CultureInfo.InvariantCulture));
+                break;
             default:
                 break;
             case "Camera":
@@ -200,9 +203,25 @@ public class Server : MonoBehaviour {
             end_eff_grab.ReleaseObj();
         }
     }
-
-    //Organizes and Sends Picture
-    IEnumerator SendCamCapture(ServerClient c, string FilePath, string FileName, string CameraSelect)
+    private void ModifyCube(int init)
+    {
+        GameObject inst_cube_obj = GameObject.Find("CanvasMain");
+        CubeInstantiate inst_cube = inst_cube_obj.GetComponent<CubeInstantiate>();
+        if (init == 1)
+        {
+            inst_cube.InstantiateRed();
+        }
+        if (init == 2)
+        {
+            inst_cube.InstantiateGreen();
+        }
+        if (init == 3)
+        {
+            inst_cube.InstantiateBlue();
+        }
+    }
+        //Organizes and Sends Picture
+        IEnumerator SendCamCapture(ServerClient c, string FilePath, string FileName, string CameraSelect)
     {
         GameObject Cube = GameObject.Find("CameraPrtSc");
         CameraPtrSc CubeComp = Cube.GetComponent<CameraPtrSc>();
