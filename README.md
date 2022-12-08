@@ -39,5 +39,5 @@ Unity Scene: UnityProject/Assets/Scenes/ImportScene2 \
 Matlab: MatlabProject - Part4.m
 \
 Video explanations in English - https://youtu.be/bwmzS4klYAo \
-Video explanations in Russian -  \
+Video explanations in Russian -  https://youtu.be/_0Lq4htc6jw \
 ![image](https://user-images.githubusercontent.com/34764174/201480908-ae95fb9e-c0ef-47ee-b1b2-28e55a3c4c4b.png)
